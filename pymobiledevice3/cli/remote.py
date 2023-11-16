@@ -95,10 +95,10 @@ async def tunnel_task(
         raise NotImplementedError('failed to start the QUIC tunnel on your platform')
 
     async with start_quic_tunnel(service_provider, secrets=secrets, max_idle_timeout=max_idle_timeout) as tunnel_result:
-        logger.info('tunnel created')
         if script_mode:
             print(f'{tunnel_result.address} {tunnel_result.port}')
         else:
+            logger.info('tunnel created')
             if secrets is not None:
                 print(click.style('Secrets: ', bold=True, fg='magenta') +
                       click.style(secrets.name, bold=True, fg='white'))
